@@ -2,7 +2,6 @@ package com.evin.core.api;
 
 import com.evin.core.event.EvinEvent;
 import com.evin.core.event.EventService;
-import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,15 +17,13 @@ public class EventController {
     }
 
     @PostMapping
-    public EvinEvent createEvent(@Valid @RequestBody CreateEventRequest request) {
+    public EvinEvent createEvent(@RequestBody CreateEventRequest request) {
         return eventService.createEvent(request);
     }
 
     @GetMapping("/{entityType}/{entityId}")
-    public List<EvinEvent> getEvents(
-            @PathVariable String entityType,
-            @PathVariable String entityId
-    ) {
-        return eventService.getEvents(entityType, entityId);
+    public List<EvinEvent> getEventsByEntity(@PathVariable String entityType,
+                                             @PathVariable String entityId) {
+        return eventService.getEventsByEntity(entityType, entityId);
     }
 }
